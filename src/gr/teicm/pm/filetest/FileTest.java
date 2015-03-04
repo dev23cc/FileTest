@@ -6,6 +6,12 @@
 package gr.teicm.pm.filetest;
 
 import java.io.File;
+import java.io.FileFilter;
+import java.io.IOException;
+import java.nio.file.FileStore;
+import java.nio.file.FileSystems;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.filechooser.FileSystemView;
 
 /**
@@ -34,6 +40,33 @@ public class FileTest {
             System.out.println("Readable: " + f[i].canRead());
             System.out.println("Writable: " + f[i].canWrite());
         }
+        File fn;
+        fn = new File("/");
+
+        FileFilter directoryFilter = new FileFilter() {
+            public boolean accept(File file) {
+                return file.isDirectory();
+            }
+        };
+
+        File[] files = fn.listFiles(directoryFilter);
+        for (File file : files) {
+            if (file.isDirectory()) {
+                System.out.print("directory:");
+            } else {
+                System.out.print("     file:");
+            }
+            try {
+                System.out.println(file.getCanonicalPath());
+            } catch (IOException ex) {
+                Logger.getLogger(FileTest.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+        for (final FileStore store : FileSystems.getDefault().getFileStores()) {
+            System.out.println(store.name());
+        }
+
     }
 
 }
