@@ -24,49 +24,53 @@ public class FileTest {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        FileSystemView fsv = FileSystemView.getFileSystemView();
-        File[] roots = fsv.getRoots();
-        for (int i = 0; i < roots.length; i++) {
-            System.out.println("Root: " + roots[i]);
-        }
-        System.out.println("Home directory: " + fsv.getHomeDirectory());
-        System.out.println("File system roots returned by File.listRoots():");
-        File[] f = File.listRoots();
-        for (int i = 0; i < f.length; i++) {
-            System.out.println("Drive: " + f[i]);
-            System.out.println("Display name: " + fsv.getSystemDisplayName(f[i]));
-            System.out.println("Is drive: " + fsv.isDrive(f[i]));
-            System.out.println("Is floppy: " + fsv.isFloppyDrive(f[i]));
-            System.out.println("Readable: " + f[i].canRead());
-            System.out.println("Writable: " + f[i].canWrite());
-        }
-        File fn;
-        fn = new File("/");
-
-        FileFilter directoryFilter = new FileFilter() {
-            public boolean accept(File file) {
-                return file.isDirectory();
-            }
-        };
-
-        File[] files = fn.listFiles(directoryFilter);
-        for (File file : files) {
-            if (file.isDirectory()) {
-                System.out.print("directory:");
-            } else {
-                System.out.print("     file:");
-            }
-            try {
-                System.out.println(file.getCanonicalPath());
-            } catch (IOException ex) {
-                Logger.getLogger(FileTest.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-
-        for (final FileStore store : FileSystems.getDefault().getFileStores()) {
-            System.out.println(store.name());
-        }
-
+        Number number = new Number(25);
+        // Non static call
+        System.out.println(number.getTheNumber());
+        // Static call
+        System.out.println(Number.getNumber());
     }
 
+//        FileSystemView fsv = FileSystemView.getFileSystemView();
+//        File[] roots = fsv.getRoots();
+//        for (int i = 0; i < roots.length; i++) {
+//            System.out.println("Root: " + roots[i]);
+//        }
+//        System.out.println("Home directory: " + fsv.getHomeDirectory());
+//        System.out.println("File system roots returned by File.listRoots():");
+//        File[] f = File.listRoots();
+//        for (int i = 0; i < f.length; i++) {
+//            System.out.println("Drive: " + f[i]);
+//            System.out.println("Display name: " + fsv.getSystemDisplayName(f[i]));
+//            System.out.println("Is drive: " + fsv.isDrive(f[i]));
+//            System.out.println("Is floppy: " + fsv.isFloppyDrive(f[i]));
+//            System.out.println("Readable: " + f[i].canRead());
+//            System.out.println("Writable: " + f[i].canWrite());
+//        }
+//        File fn;
+//        fn = new File("/");
+//
+//        FileFilter directoryFilter = new FileFilter() {
+//            public boolean accept(File file) {
+//                return file.isDirectory();
+//            }
+//        };
+//
+//        File[] files = fn.listFiles(directoryFilter);
+//        for (File file : files) {
+//            if (file.isDirectory()) {
+//                System.out.print("directory:");
+//            } else {
+//                System.out.print("     file:");
+//            }
+//            try {
+//                System.out.println(file.getCanonicalPath());
+//            } catch (IOException ex) {
+//                Logger.getLogger(FileTest.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//        }
+//
+//        for (final FileStore store : FileSystems.getDefault().getFileStores()) {
+//            System.out.println(store.name());
+//        }
 }
